@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 的 CSS 文件 -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous">
+  <title>AJAX GET 请求</title>
+  <style>
+    #result{
+      width: 200px;
+      height: 100px;
+      border: solid 2px #90b;
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex justify-content-center align-items-center" style="flex-direction: column;">
+    <button class="btn btn-primary my-3">点击发送请求</button>
+    <div id="result" class="d-flex justify-content-center align-items-center"></div>
+  </div>
+
+  <script>
+    //获取button元素
+    const btn = document.getElementsByTagName('button')[0];
+    const result = document.getElementById("result");
+    //绑定事件
+    btn.onclick = function(){
+      //1.创建对象
+      const xhr = new XMLHttpRequest(); 
+      //2.初始化 设置请求方法和url
+      //url后设置参数，&连接
+      xhr.open('GET','http://127.0.0.1:8000/server?a=100&b=200&c=300');
+      //3.发送
+      xhr.send();
+      //4.事件绑定 处理服务端返回的结果
+      //on when 当....时候
+      //readystate 是xhr对象中的属性，表示状态 0 1 2 3 4 
+      //change 改变
+      xhr.onreadystatechange = function(){
+        //判断（服务端返回了所有的结果）
+        if(xhr.readyState === 4){
+          //判断响应状态码 200 404 403 401 500
+          //2xx成功
+          if(xhr.status >= 200 && xhr.status < 300){
+            //处理结果 行 头 空行 体
+            //响应
+            // console.log(xhr.status); //状态码
+            // console.log(xhr.statusText); //状态字符串
+            // console.log(xhr.getAllResponseHeaders()); //所有响应头
+            // console.log(xhr.response); //响应体
+            // 设置 result 的文本
+            result.innerHTML = xhr.response;
+          }else{
+
+          }
+        }
+      }
+    }
+  </script>
+</body>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+</html>

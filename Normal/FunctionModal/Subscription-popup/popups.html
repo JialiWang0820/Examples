@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <title>Popups</title>
+  </head>
+  <style>
+    .modal-dialog {
+      max-width:432px !important;
+    }
+    @media (min-width: 768px) {
+      .modal-dialog {
+        max-width:856px !important;
+      }
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="container-topic py-md-6 py-5">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popUps">
+          Trigger the popup
+        </button>
+        <div class="modal fade" id="popUps" aria-hidden="true" aria-labelledby="popUpsLabel">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6 col-12">
+                    <img class="w-100 h-100" src="https://place-hold.it/400x452/eaeaea/000&fontsize=18" alt="">
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <img class="w-100 h-100" src="https://place-hold.it/400x452/eaeaea/000&fontsize=18" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+</html>

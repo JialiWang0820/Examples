@@ -1,0 +1,149 @@
+<!-- 以下是进度条 0-100%（图片处理）之 transition -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Progress</title>
+  <style>
+    .player-game {
+      margin-top: 17.77778vw;
+      height: 60vw;
+      background-color: black;
+    }
+    .player-game {
+      width: 100%;
+      position: relative;
+      color: #FFFFFF;
+      overflow: hidden;
+      margin-top: -1px;
+    }
+    .player-game-data {
+      position: absolute;
+      z-index: 1;
+      top: 261.66667vw;
+      left: 5.55556vw;
+      width: 85.27778vw;
+      height: 57.77778vw;
+    }
+    .player-game-data-bg {
+      position: absolute;
+      overflow: hidden;
+      top: 27.22222vw;
+      left: 6.38889vw;
+      width: 0%;
+      opacity: 0;
+      height: 17.5vw;
+    }
+    .player-game-data-bg.active {
+      width: 100%;
+      opacity: 1;
+      transition: width 3s,opacity 3s;
+    }
+    .player-game-data-bg-img {
+      height: 100%;
+      width: 78.88889vw;
+    }
+    .lazyloaded {
+      opacity: 1;
+      transition: opacity 300ms;
+    }
+    .player-game-data-3 {
+      position: absolute;
+      font-family: 'OPPOSans-Ver2-Regular';
+      font-variation-settings: 'wght' 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+      font-size: 3.33333vw;
+      top: 27.22222vw;
+      left: 0.83333vw;
+    }
+    .player-game-data-4 {
+      position: absolute;
+      font-family: 'OPPOSans-Ver2-Regular';
+      font-variation-settings: 'wght' 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+      font-size: 3.33333vw;
+      top: 42.11111vw;
+      left: 0.83333vw;
+    }
+    .player-game-data-5 {
+      position: absolute;
+      font-family: 'OPPOSans-Ver2-Regular';
+      font-variation-settings: 'wght' 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+      font-size: 3.33333vw;
+      top: 46.94444vw;
+      left: 6.38889vw;
+    }
+    .player-game-data-6 {
+      position: absolute;
+      font-family: 'OPPOSans-Ver2-Regular';
+      font-variation-settings: 'wght' 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+      font-size: 3.33333vw;
+      top: 46.94444vw;
+      left: 28.61111vw;
+    }
+    .player-game-data-7 {
+      position: absolute;
+      font-family: 'OPPOSans-Ver2-Regular';
+      font-variation-settings: 'wght' 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+      font-size: 3.33333vw;
+      top: 46.94444vw;
+      left: 53.33333vw;
+    }
+    .player-game-data-8 {
+      position: absolute;
+      font-family: 'OPPOSans-Ver2-Regular';
+      font-variation-settings: 'wght' 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+      font-size: 3.33333vw;
+      top: 46.94444vw;
+      left: 75vw;
+    }
+  </style>
+</head>
+<body>
+  <div class="player-game">
+      <div id="progress-bg" class="player-game-data-bg" style="visibility: inherit;">
+        <picture>
+          <img class="player-game-data-bg-img ls-is-cached lazyloaded" alt="" data-src-webp="false" src="https://www.oppo.com/content/dam/oppo/product-asset-library/k/k10-cn/v2/assets/module-player/module-player-game-data-bg-360.png">
+        </picture>
+      </div>
+      <div class="player-game-data-3">90</div>
+      <div class="player-game-data-4">0</div>
+      <div class="player-game-data-5">Time</div>
+      <div class="player-game-data-6">1200s</div>
+      <div class="player-game-data-7">2400s</div>
+      <div class="player-game-data-8">3600s</div>
+    </div>
+  </div>
+  <script>
+    function Page () {
+    }
+    Page.prototype = {
+      init: function () {
+        this.initAnimation()
+      },
+      initAnimation:
+      function () {
+        window.addEventListener('load', function() {
+          var progressbg = document.querySelector('#progress-bg')
+          progressbg.classList.add('active')
+        });
+        // that.$progressbg.style.width = `100%`
+      }
+    }
+    var page = new Page()
+    page.init()
+  </script>
+</body>
+</html>

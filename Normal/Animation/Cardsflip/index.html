@@ -1,0 +1,183 @@
+<!-- 卡片翻转 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 的 CSS 文件 -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous">
+  <title>Cards Flip</title>
+  <style>
+    /* Reseting */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body{
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container{
+      /* container的子元素位于3D空间中，不设置不影响显示 */
+      transform-style: preserve-3d;
+    }
+
+    .container .box{
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px;
+      /* 设置元素的子元素是位于 3D 空间中还是平面中 */
+      transform-style: preserve-3d;
+      /* 指定了观察者与 z=0 平面的距离为 1000px */
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .container .box .body{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: 0.9s ease;
+    }
+
+    .container .box .body .imgContainer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .container .box .body .imgContainer img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 当元素背面朝向观察者时是否可见 */
+      backface-visibility: hidden;
+    }
+
+    /* 初始化content所在div旋转180度，且不可见 */
+    .container .box .body .content{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #333;
+      /* 当元素背面朝向观察者时是否可见 */
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      transform: rotateY(180deg);
+    }
+
+    /* 鼠标hover事件 */
+    /* .container .box:hover .body{
+      transform: rotateY(180deg);
+    } */
+
+    /* 鼠标click事件 */
+    .container .box .body.rotate{
+      transform: rotateY(180deg);
+    }
+
+    .container .box .body .content div{
+      transform-style: preserve-3d;
+      padding: 20px;
+      background: linear-gradient(45deg, #FE0061,#FFEB3B);
+      width: 100%;
+      height: 100%;
+      /* z轴位移 */ 
+      transform: translateZ(100px);
+    }
+
+    .container .box .body .content div h3{
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container d-flex align-items-center justify-content-center flex-wrap">
+    <div class="box as-boxes-flip">
+        <div class="body">
+            <div class="imgContainer">
+                <img src="https://images.pexels.com/photos/3601422/pexels-photo-3601422.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+            </div>
+            <div class="content d-flex flex-column align-items-center justify-content-center">
+                <div>
+                    <h3 class="text-white fs-5">This is Post Title 1</h3>
+                    <p class="fs-6 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sed cum neque, rem provident ex. Laboriosam perspiciatis modi eveniet in?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box as-boxes-flip">
+      <div class="body">
+          <div class="imgContainer">
+              <img src="https://images.pexels.com/photos/3601422/pexels-photo-3601422.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+          </div>
+          <div class="content d-flex flex-column align-items-center justify-content-center">
+              <div>
+                  <h3 class="text-white fs-5">This is Post Title 2</h3>
+                  <p class="fs-6 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sed cum neque, rem provident ex. Laboriosam perspiciatis modi eveniet in?</p>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="box as-boxes-flip">
+      <div class="body">
+          <div class="imgContainer">
+              <img src="https://images.pexels.com/photos/3601422/pexels-photo-3601422.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+          </div>
+          <div class="content d-flex flex-column align-items-center justify-content-center">
+              <div>
+                  <h3 class="text-white fs-5">This is Post Title 3</h3>
+                  <p class="fs-6 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sed cum neque, rem provident ex. Laboriosam perspiciatis modi eveniet in?</p>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+  <script>
+    let boxes = document.querySelectorAll('.as-boxes-flip')
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].addEventListener('click',function(){
+        var body = boxes[i].querySelector('.body')
+        body.classList.add('rotate')
+        setTimeout(function () {
+          for (let k = 0; k < boxes.length; k++) 
+          {
+            if(i != k)
+            {
+              boxes[k].querySelector('.body').classList.add('rotate')
+            }  
+          }
+        }, 2000);
+      })
+    }
+  </script>
+</body>
+</html>

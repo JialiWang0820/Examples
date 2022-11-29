@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>siema</title>
+</head>
+<body>
+  <div class="siema">
+    <div>Hi, I'm slide 5</div>
+    <div>Hi, I'm slide 2</div>
+    <div>Hi, I'm slide 3</div>
+    <div>Hi, I'm slide 4</div>
+  </div>
+  <script>
+    const mySiema = new Siema();
+      document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
+      document.querySelector('.next').addEventListener('click', () => mySiema.next());
+  </script>
+</body>
+</html>

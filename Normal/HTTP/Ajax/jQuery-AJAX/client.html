@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 的 CSS 文件 -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous">
+  <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <title>jQuery 发送 AJAX 请求</title>
+</head>
+<body>
+  <div class="cotainer">
+    <h2 class="page-header">jQuery发送AJAX请求</h2>
+    <button class="btn btn-primary">GET</button>
+    <button class="btn btn-danger">POST</button>
+    <button class="btn btn-info">通用型方法ajax</button>
+  </div>
+  <script>
+    $('button').eq(0).click(function(){
+      $.get('http://127.0.0.1:8000/jquery-server',{a:100,b:200},function(data){
+        console.log(data);
+      },'json');
+    })
+
+    $('button').eq(1).click(function(){
+      $.post('http://127.0.0.1:8000/jquery-server',{a:100,b:200},function(data){
+        console.log(data);
+      });
+    })
+
+    //给服务端发请求，请求类型可控制，参数可控制，头信息可控制，post请求可设置请求体
+    //可在报文的任何位置设置参数，功能性较强，简易程度较麻烦，自定义程度强
+    $('button').eq(2).click(function(){
+      $.ajax({
+        //url
+        url: 'http://127.0.0.1:8000/jquery-server',
+        // 参数
+        data:{a:100,b:200},
+        // 请求类型
+        type:'GET',
+        // 响应体结果
+        dataType:'json',
+        //成功的回调
+        success:function(data){
+          console.log(data);
+        },
+        // 超时时间
+        timeout:2000,
+        //失败的回调
+        error: function(){
+          console.log('出错了!');
+        },
+        //头信息
+        headers:{
+          c:300,
+          d:400
+        }
+      });
+    });
+  </script>
+</body>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+</html>

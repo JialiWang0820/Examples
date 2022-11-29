@@ -1,0 +1,185 @@
+body {
+    font-family: "SimSun", "Arial";
+    padding: 0;
+    /*内边距*/
+    margin: 0;
+    /*外边距*/
+    display: flex;
+    /*弹性布局*/
+    flex-direction: column;
+    /*纵向*/
+    align-items: center;
+    /*元素位于容器中心*/
+    background-image: url(../img/body\ bg.jpg);
+    /*背景图片*/
+    background-repeat: repeat;
+    /*背景图片向x轴和y轴重复*/
+}
+
+header nav {
+    position: fixed;
+    /*相对于浏览器窗口固定定位*/
+    width: auto;
+    height: 60px;
+    z-index: 1;
+    /*指定元素堆叠顺序*/
+    background-color: #FFCCFF;
+    font-family: "华文行楷";
+    border-radius: 20px;
+}
+
+header nav ul li {
+    display: inline-block;
+    /*行内块元素*/
+}
+
+header nav ul li a {
+    text-decoration: underline;
+    /*下划线*/
+    color: purple;
+    font-size: 20px;
+    /*字体大小*/
+    padding: 8px;
+    /*内边距*/
+}
+
+header nav ul li:hover a {
+    color: white;
+    /*鼠标点击字体变白色*/
+    font-size: 160%;
+    /*字体放大*/
+    background-image: url(../img/body\ bg.jpg);
+    /*鼠标点击出现背景图片*/
+}
+
+.item div {
+    min-height: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item div p {
+    padding: 10px;
+    /*内边距均为10px*/
+    line-height: 200%;
+    /*行高*/
+    text-indent: 0px;
+    /*首行文本缩进*/
+}
+
+.item div h2 {
+    font-family: "隶书";
+    /*字体*/
+    font-size: 25px;
+    /*字体大小*/
+    letter-spacing: 7px;
+    /*文字间隙*/
+    text-shadow: 2px 2px wheat;
+    /*文本阴影*/
+    margin-top: 30px;
+    /*设置文本上边距*/
+    margin-bottom: 20px;
+    filter: drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.8));
+    /*阴影滤镜*/
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    /*居中*/
+    background-color: #FFEFD5;
+    box-shadow: 10px 10px 5px rgb(0, 0, 0);
+    /*阴影*/
+    margin-top: 15px;
+    /*上边距*/
+}
+
+.audio-item{
+    margin-right: 80%;
+}
+
+.title-item {
+    margin-top: 100px;
+    background-image: url(../img/item1\ table\ bg.jpg);
+    font-family: "华文新魏";
+    font-size: 20px;
+    text-align: left;
+    display: inline-block;
+    border-radius: 20px;
+    color: black;
+}
+
+.first-item {
+    margin-top: 20px;
+    border-radius: 40px;
+    height: 450px;
+    width: 80%;
+}
+
+.second-item {
+    border-radius: 20%;
+    height: 300px;
+    width: 30%;
+}
+
+.third-item {
+    border-radius: 40%;
+    height: 1200px;
+    width: 30%;
+    text-align: center;
+    margin-left:0px;
+}
+
+.third-item ul li{
+    list-style-type:none;
+}
+
+.third-item h2{
+    margin: 0px;
+    text-align: right;
+    /*设置文本边距*/
+}
+
+
+.last-item {
+    margin-bottom: 10px;
+    height: 425px;
+    width: 50%;
+}
+
+.p {
+    margin: 50px;
+}
+
+.p-right {
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.p-left {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.img-left {
+    margin-left: 100px;
+    /*图片左边距*/
+    filter: drop-shadow(8px 4px 8px rgba(112, 5, 5, 0.8));
+    /*图片不规则投影设置*/
+    border-radius:20px;
+}
+
+.img-right {
+    border-radius: 50%;
+    margin-right: 50px;
+    filter: drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+.img-center{
+    border-radius: 50%;
+    margin-right: 0px;
+    margin-left: 100px;
+    filter: drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.8));
+}

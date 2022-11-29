@@ -1,0 +1,194 @@
+<!-- 点击增减框 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
+  </head>
+  <style>
+    body,input{
+      margin:0;
+      padding:0;
+    }
+    
+    /*
+      鞋子的数量
+      ----------------------------------------------------
+    */
+    
+    .shoes-cnt{
+      margin-top:10px;
+      width:100%;
+      display:flex;
+      display:-webkit-flex;
+      height:25px;
+    }
+    
+    .shoes-cnt-notice{
+      line-height:25px;
+      width:50px;
+      text-align:center;
+    }
+    
+    .shoes-cnt-minus{
+      width:25px;
+      height:25px;
+      box-sizing:border-box;
+      border:1px solid grey;
+      text-align:center;
+      line-height:23px;
+      font-size:18px;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .shoes-cnt-minus-blur{
+      color:#b1b1b1;
+    }
+    
+    .shoes-cnt-area{
+      width:35px;
+      height:25px;
+      border-top:1px solid grey;
+      border-bottom:1px solid grey;
+      box-sizing:border-box;
+    }
+    
+    .shoes-cnt-input{
+      width:100%;
+      height:100%;
+      border:none;
+      outline:none;
+      text-align:center;
+      border-bottom: 1px solid grey!important;
+    }
+    
+    .shoes-cnt-plus{
+      width:25px;
+      height:25px;
+      box-sizing:border-box;
+      border:1px solid grey;
+      text-align:center;
+      text-align:center;
+      line-height:23px;
+      font-size:18px;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .shoes-cnt-plus-blur{
+      color:#b1b1b1;
+    }
+    
+    .shoes-cnt-max{
+      flex:1;
+      line-height:25px;
+      font-size:12px;
+      display:none;
+      color:#f23030;
+    }
+  </style>
+  <body>
+    <div class="shoes-cnt">
+      <div class="shoes-cnt-notice">
+        数量
+      </div>
+      <div class="shoes-cnt-minus shoes-cnt-minus-blur">
+        -
+      </div>
+      <div class="shoes-cnt-area">
+        <input type="text" class="shoes-cnt-input" value="1" />
+      </div>
+      <div class="shoes-cnt-plus">
+        +
+      </div>
+      <div class="shoes-cnt-max">
+        （限购200件）
+      </div>
+    </div>
+  </body>
+  <script>
+    /*
+鞋子数量输入选择
+-------------------------------
+1.鞋子数量最大上限需要与后端共同验证
+*/
+
+//单次可以购买鞋的最大数量
+var cnt_max=200;
+
+$(".shoes-cnt-minus").click(function(){
+var input_value=$(".shoes-cnt-input").val();
+$(".shoes-cnt-input").val(--input_value);
+validateCnt();
+});
+
+$(".shoes-cnt-plus").click(function(){
+var input_value=$(".shoes-cnt-input").val();
+$(".shoes-cnt-input").val(++input_value);
+validateCnt();
+});
+
+
+
+$(".shoes-cnt-input").blur(function(){
+validateCnt();
+});
+
+$(".shoes-cnt-input").keyup(function(){
+var input_value=$(".shoes-cnt-input").val();
+if(input_value.length>2)
+{
+  validateCnt();
+}
+});
+
+
+
+/*数字验证*/
+function validateCnt(){
+var input_value=$(".shoes-cnt-input").val();
+$(".shoes-cnt-max").hide();
+if(isNaN(input_value))
+{
+  $(".shoes-cnt-input").val(1);
+  $(".shoes-cnt-minus").addClass("shoes-cnt-minus-blur");
+
+}else{
+  if(input_value>=cnt_max)
+  {
+    $(".shoes-cnt-input").val(cnt_max);
+
+    $(".shoes-cnt-max").show();
+    $(".shoes-cnt-minus").removeClass("shoes-cnt-minus-blur");
+    $(".shoes-cnt-plus").addClass("shoes-cnt-plus-blur");
+  }
+
+  if(input_value<=1)
+  {
+    $(".shoes-cnt-input").val(1);
+
+    $(".shoes-cnt-minus").addClass("shoes-cnt-minus-blur");
+  }
+
+  if(input_value>1&&input_value<cnt_max)
+  {
+    $(".shoes-cnt-minus").removeClass("shoes-cnt-minus-blur");
+    $(".shoes-cnt-plus").removeClass("shoes-cnt-plus-blur");
+  }
+}
+}
+</script>
+</html>

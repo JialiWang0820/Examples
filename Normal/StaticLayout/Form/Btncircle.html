@@ -1,0 +1,74 @@
+<!-- 点击按钮转圈 circling -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 的 CSS 文件 -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous">
+  <style>
+    #share-btn-text {
+      line-height: 36px;
+    }
+
+    #loading-first {
+      padding: 4px 35.455px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    .spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+    }
+
+    .opacity-0 {
+      opacity: 0;
+    }
+    
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="d-flex align-items-center justify-content-center py-5">
+    <a class="btn btn-primary as-loading" id="start-sharing" style="color: #f7f7f7;cursor: pointer;">
+      <div class="position-relative">
+        <div class="text-center position-absolute justify-content-center" id="loading-first" style="display: none;">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden"></span>
+          </div>
+        </div>
+        <div id="share-btn-text">
+          Start Sharing  Start Sharing  Start Sharing
+        </div>
+      </div>
+    </a>
+  </div>
+  <script>
+    var start_sharing = document.getElementById("start-sharing");
+    var loading_first = document.getElementById("loading-first");
+    var share_btn_text = document.getElementById("share-btn-text");
+
+    start_sharing.addEventListener('click',function(){
+      loading_first.classList.add('d-block')
+      share_btn_text.classList.add('opacity-0')
+      start_sharing.classList.add('disabled')
+      setTimeout(() => {
+        loading_first.classList.remove('d-block')
+        share_btn_text.classList.remove('opacity-0')
+        start_sharing.classList.remove('disabled')
+      }, 1000);
+    })
+  </script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+</body>
+</html>

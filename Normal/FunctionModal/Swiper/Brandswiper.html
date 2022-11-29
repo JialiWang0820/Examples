@@ -1,0 +1,222 @@
+<!-- ZTE 品牌页面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <!-- Demo styles -->
+  <style>
+    .swiper-section {
+      position: relative;
+      text-align: center;
+      align-items: center;
+    }
+
+    .year-offset {
+      position: relative;
+      top: -70px;
+    }
+
+    .text-swiper {
+      text-align: center;
+    }
+
+    .img-swiper {
+      text-align: center;
+
+    }
+
+    .img-swiper img {
+      width: 480px;
+      height: 320px
+    }
+
+    .year-swiper {
+      /* 添加 */
+      text-align: center;
+      align-items: center;
+      font-size: 100px;
+      transform: scale(0.5);
+      transition: all 1s;
+      color: rgb(158, 158, 158);
+      margin: 0px;
+
+    }
+
+    .swiper-slide-active .year-swiper {
+      /* 添加 */
+      color: #000;
+      transform: scale(1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="swiper-section">
+    <!-- Swiper -->
+
+    <div class="swiper imageSwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-swiper">
+            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="year-offset">
+
+      <div class="swiper yearSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <p class="year-swiper">2016</p>
+          </div>
+          <div class="swiper-slide">
+            <p class="year-swiper">2017</p>
+          </div>
+          <div class="swiper-slide">
+            <p class="year-swiper">2018</p>
+          </div>
+          <div class="swiper-slide">
+            <p class="year-swiper">2019</p>
+          </div>
+          <div class="swiper-slide">
+            <p class="year-swiper">2020</p>
+          </div>
+          <div class="swiper-slide">
+            <p class="year-swiper">2021</p>
+          </div>
+          <div class="swiper-slide">
+            <p class="year-swiper">2022</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper textSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>AAA</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>BBB</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>CCC</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>DDD</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>EEE</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>FFF</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="text-swiper">
+              <p>GGG</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-swiper">
+        <button class="button-prev">prev</button>
+        <button class="button-next">next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var imgswiper = new Swiper(".imageSwiper", {
+      effect: "fade",
+      allowTouchMove: false,
+    });
+
+    var textwiper = new Swiper(".textSwiper", {
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      allowTouchMove: false,
+      thumbs: {
+        swiper: imgswiper,
+      },
+    });
+
+    var swiper = new Swiper(".yearSwiper", {
+      speed: 1000,
+      slidesPerView: 1,
+      centeredSlides: true,
+      spaceBetween: 0,
+      breakpoints: {
+        // when window width is >= 768px
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        },
+      },
+
+      thumbs: {
+        swiper: textwiper,
+      },
+      navigation: {
+        nextEl: ".button-next",
+        prevEl: ".button-prev"
+      }
+    });
+  </script>
+</body>
+
+</html>

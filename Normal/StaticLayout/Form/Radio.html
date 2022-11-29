@@ -1,0 +1,64 @@
+<!-- 单选自定义样式 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio</title>
+  <style>
+    .radio {
+    
+    position: relative;
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  .radio input {
+  
+    width: 15px;
+    height: 15px;
+    appearance: none;
+    /*清楚默认样式*/
+    -webkit-appearance: none;
+    opacity: 0;
+    outline: none;
+  }
+
+  .radio label {
+  
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #3582E9;
+  }
+
+  .radio input:checked+label::after {
+  
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    /* 这里显示矩形的一半边框再旋转45度来实现对勾样式 */
+    width: 5px;
+    height: 12px;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    transform: rotate(45deg);
+  }
+  </style>
+</head>
+  <div class="radio">
+    <input type="radio" id="sex1" name="sex">
+    <label for="sex1"></label>
+    男
+  </div>
+  <div class="radio">
+    <input type="radio" id="sex2" name="sex">
+    <label for="sex2"></label> 女
+  </div>
+  <input type="email" required>
+</body>
+</html>
