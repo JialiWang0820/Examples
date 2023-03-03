@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>HTML5 multi-touch</title>
+    <style>
+      canvas {
+        touch-action: none;
+        border: 1px solid #000;
+      }
+    </style>
+    <script>
+    var canvas;
+    var ctx;
+    var lastPt = new Object();
+    var colours = ['red', 'green', 'blue', 'yellow', 'black'];
+ 
+    function init() {
+      canvas = document.getElementById('mycanvas');
+      ctx = canvas.getContext("2d");
+
+      if(window.PointerEvent) {
+        canvas.addEventListener("pointerdown", function() {
+          canvas.addEventListener("pointermove", draw, false);
+        }, false);
+        canvas.addEventListener("pointerup", endPointer, false);
+      }
+      else {
+        /* 为不支持指针事件的用户代理提供回退 */
+        canvas.addEventListener("mousedown", function() {
+          canvas.addEventListener("mousemove", draw, false);
+        }, false);
+        canvas.addEventListener("mouseup", endPointer, false);
+      }
+    }
+ 
+    function draw(e) {
+      var id = e.pointerId;   
+      if(lastPt[id]) {
+        ctx.beginPath();
+        ctx.moveTo(lastPt[id].x, lastPt[id].y);
+        ctx.lineTo(e.pageX, e.pageY);
+        ctx.strokeStyle = colours[id % 5];
+        ctx.stroke();
+      }
+      // Store last point
+      lastPt[id] = {x:e.pageX, y:e.pageY};
+    }
+ 
+    function endPointer(e) {
+      var id = e.pointerId;
+    
+      canvas.removeEventListener("mousemove", draw, false); 
+      // Terminate this touch
+      delete lastPt[id];
+    }  
+ 
+  </script>
+  </head>
+  <body onload="init()">
+    <canvas id="mycanvas" width="500" height="500">
+      Canvas element not supported.
+    </canvas>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 3 offcanvas</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  
+  <style>
+    .offcanvas {
+      position: fixed;
+      bottom: 0;
+      z-index: 1050;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      visibility: hidden;
+      background-color: #fff;
+      background-clip: padding-box;
+      outline: 0;
+      transition: transform .3s ease-in-out;
+    }
+    .offcanvas.show {
+      transform: none;
+    }
+    .offcanvas-start {
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-right: 1px solid rgba(0,0,0,.2);
+      transform: translateY(100%);
+    }
+    .offcanvas-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1rem;
+    }
+    .offcanvas-body {
+      flex-grow: 1;
+      padding: 1rem 1rem;
+      overflow-y: auto;
+    }
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1040;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+    }
+    .fade {
+      transition: opacity .15s linear;
+    }
+    .modal-backdrop.fade {
+      opacity: 0;
+    }
+    .modal-backdrop.show {
+      opacity: .5;
+    }
+    .body-style {
+      overflow: hidden;
+      padding-right: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="offCanvasBtn" class="btn btn-primary" type="button">
+    Button with data-bs-target
+  </button>
+  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="fade modal-backdrop"></div>
+  <script>
+    var offCanvasBtn = document.querySelector('#offCanvasBtn')
+    var offcanvasExample = document.querySelector('#offcanvasExample')
+    var modalBackdrop = document.querySelector('.modal-backdrop')
+    offCanvasBtn.addEventListener('click',function() {
+      console.log("Clicked!!")
+      offcanvasExample.classList.add("show","d-block")
+      offcanvasExample.removeAttribute("aria-hidden")
+      offcanvasExample.setAttribute("aria-moda","true")
+      document.body.classList.add("body-style ");
+      modalBackdrop.classList.add("show")
+    })
+  </script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+
+</html>

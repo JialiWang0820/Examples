@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path Draw</title>
+  <style>
+    #myCanvas {
+      /* 禁用固有的用户代理触摸行为，如平移或缩放 */
+      touch-action: none;
+      border: 1px solid #000;
+    }
+  </style>
+  <script type='text/javascript'>
+    var lastPt = null;
+    var canvas;
+    var ctx;
+
+    function init() {
+      canvas = document.getElementById("myCanvas")
+      /* 建立二维画布渲染上下文 */
+      ctx = canvas.getContext("2d") 
+      var offset = getOffset(canvas)
+      if(window.PointerEvent) {
+        canvas.addEventListener("pointerdown",function() {
+          canvas.addEventListener("pointermove",draw,false)
+        },false)
+        canvas.addEventListener("pointerup",endPointer,false)
+      }else {
+        /* 为不支持指针事件的用户代理提供回退 */
+        canvas.addEventListener("mousedown", function() {
+          canvas.addEventListener("mousemove", draw, false);
+        }, false);
+        canvas.addEventListener("mouseup", endPointer, false);
+      }
+    }
+
+    /* 为每个 pointerdown 事件调用的事件处理程序 */
+    function draw(e) {
+      if(lastPt != null) {
+        ctx.beginPath()
+        ctx.moveTo(lastPt.x,lastPt.y)
+        ctx.lineTo(e.pageX,e.pageY)
+        ctx.stroke()
+      }
+      /* 存储最新的指针 */
+      lastPt = {x:e.pageX, y:e.pageY};
+    }
+
+    function getOffset(obj) {
+      //...
+    }
+
+    function endPointer(e) {
+      //停止追踪事件
+      canvas.removeEventListener("pointermove", draw, false); 
+      canvas.removeEventListener("mousemove", draw, false); 
+      //将最后一个点设置为null结束指针路径
+      lastPt = null;
+    }
+  </script>
+</head>
+<body onload="init()">
+  <canvas id="myCanvas" width="1000px" height="500px"></canvas>
+</body>
+</html>

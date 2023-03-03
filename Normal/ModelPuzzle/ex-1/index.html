@@ -1,0 +1,44 @@
+<!-- 此示例参考 HTML5 Drag & Drop 实现 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle ex1</title>
+  <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+
+<body onload="checkBrowser();">
+  <header>
+    <h1>A four piece puzzle</h1>
+  </header>
+
+  <section id="puzzleContainer">
+    <div id="containerPieces" ondragenter="return enter(event)" ondragover="return over(event)"
+      ondrop="return drop(event)">
+      <img id="piece3" src="https://1.bp.blogspot.com/-8LurPyhzlD4/USVEdAH-KJI/AAAAAAAAA54/INQRSWmH79k/s320/pieza3.jpg"
+        alt="piece3" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+      <img id="piece2" src="https://1.bp.blogspot.com/-daD5d1V4ct4/USVEdAGqdDI/AAAAAAAAA50/XXo8rBlTGpQ/s320/pieza2.jpg"
+        alt="piece2" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+      <img id="piece4" src="https://4.bp.blogspot.com/-2R3yc2Kggvo/USVEd9UUR5I/AAAAAAAAA6A/YBxpgYG15NI/s320/pieza4.jpg"
+        alt="piece4" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+      <img id="piece1" src="https://3.bp.blogspot.com/-gA3KvKhA-8w/USVEdAiWi6I/AAAAAAAAA58/btNKJqIkXHc/s320/pieza1.jpg"
+        alt="piece1" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+    </div>
+    <div id="puzzle">
+      <div class="containerPiece" id="uno" ondragenter="return enter(event)" ondragover="return over(event)"
+        ondrop="return drop(event)"></div>
+      <div class="containerPiece" id="dos" ondragenter="return enter(event)" ondragover="return over(event)"
+        ondrop="return drop(event)"></div>
+      <div class="containerPiece" id="tres" ondragenter="return enter(event)" ondragover="return over(event)"
+        ondrop="return drop(event)"></div>
+      <div class="containerPiece" id="cuatro" ondragenter="return enter(event)" ondragover="return over(event)"
+        ondrop="return drop(event)"></div>
+    </div>
+  </section>
+  <script src="./index.js"></script>
+</body>
+
+</html>

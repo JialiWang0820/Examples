@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    [data-words] {
+      overflow: hidden;
+    }
+    [data-words]:after {
+      display: none !important;
+    }
+    .text-anim-item {
+      white-space: nowrap;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      -webkit-transform: translate3d(0, -120%, 0);
+      transform: translate3d(0, -120%, 0);
+    }
+    .text-anim-item.anim-in {
+      -webkit-transform: translate3d(-50%, -120%, 0);
+      transform: translate3d(-50%, -120%, 0);
+      -webkit-animation: textAnimInCenter .6s .3s forwards;
+      animation: textAnimInCenter .6s .3s forwards;
+    }
+    .text-anim-item.anim-out {
+      -webkit-transform: translate3d(-50%, 0%, 0);
+      transform: translate3d(-50%, 0%, 0);
+      -webkit-animation: textAnimOutCenter .6s  forwards;
+      animation: textAnimOutCenter .6s  forwards;
+    }
+    @-webkit-keyframes textAnimIn {
+      0% {
+        -webkit-transform: translate3d(0, -120%, 0);
+        transform: translate3d(0, -120%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(0, 0%, 0);
+        transform: translate3d(0, 0%, 0);
+      }
+    }
+    @keyframes textAnimIn {
+      0% {
+        -webkit-transform: translate3d(0, -120%, 0);
+        transform: translate3d(0, -120%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(0, 0%, 0);
+        transform: translate3d(0, 0%, 0);
+      }
+    }
+    @-webkit-keyframes textAnimOut {
+      0% {
+        -webkit-transform: translate3d(0, 0%, 0);
+        transform: translate3d(0, 0%, 0);
+      }
+      50% {
+        -webkit-transform: translate3d(0, -20%, 0);
+        transform: translate3d(0, -20%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(0, 120%, 0);
+        transform: translate3d(0, 120%, 0);
+      }
+    }
+    @keyframes textAnimOut {
+      0% {
+        -webkit-transform: translate3d(0, 0%, 0);
+        transform: translate3d(0, 0%, 0);
+      }
+      50% {
+        -webkit-transform: translate3d(0, -20%, 0);
+        transform: translate3d(0, -20%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(0, 120%, 0);
+        transform: translate3d(0, 120%, 0);
+      }
+    }
+    @-webkit-keyframes textAnimInCenter {
+      0% {
+        -webkit-transform: translate3d(-50%, -120%, 0);
+        transform: translate3d(-50%, -120%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(-50%, 10%, 0);
+        transform: translate3d(-50%, 10%, 0);
+      }
+    }
+    @keyframes textAnimInCenter {
+      0% {
+        -webkit-transform: translate3d(-50%, -120%, 0);
+        transform: translate3d(-50%, -120%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(-50%, 10%, 0);
+        transform: translate3d(-50%, 10%, 0);
+      }
+    }
+    @-webkit-keyframes textAnimOutCenter {
+      0% {
+        -webkit-transform: translate3d(-50%, 0%, 0);
+        transform: translate3d(-50%, 0%, 0);
+      }
+      50% {
+        -webkit-transform: translate3d(-50%, -20%, 0);
+        transform: translate3d(-50%, -20%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(-50%, 120%, 0);
+        transform: translate3d(-50%, 120%, 0);
+      }
+    }
+    @keyframes textAnimOutCenter {
+      0% {
+        -webkit-transform: translate3d(-50%, 0%, 0);
+        transform: translate3d(-50%, 0%, 0);
+      }
+      50% {
+        -webkit-transform: translate3d(-50%, -20%, 0);
+        transform: translate3d(-50%, -20%, 0);
+      }
+      100% {
+        -webkit-transform: translate3d(-50%, 120%, 0);
+        transform: translate3d(-50%, 120%, 0);
+      }
+    }
+    .anim-line {
+      left: auto;
+    }
+    .anim-line {
+      position: absolute;
+      width: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 8px;
+      margin: 0 auto;
+      border-radius: 5px;
+      background: #ee7000;
+      -webkit-transition: opacity .3s linear, width .3s .4s;
+      transition: opacity .3s linear, width .3s .4s;
+    }
+    .anim-line.line-active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div data-delay="1200" data-words>
+    <span class="text-anim-items">
+      <span class="text-anim-item"><span>jQuery</span></span>
+      <span class="text-anim-item"><span>CSS</span></span>
+      <span class="text-anim-item"><span>Angular</span></span>
+      <span class="text-anim-item"><span>Vue</span></span>
+      <span class="text-anim-item"><span>React</span></span>
+    </span>
+    <span class="anim-line"></span>
+  </div>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

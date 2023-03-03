@@ -1,0 +1,108 @@
+:root {
+  --color:lightgray;
+  /* 完整图片 */
+  --image:url('https://media.gettyimages.com/vectors/cute-cartoon-dachshunds-in-love-vector-id865392634?s=2048x2048');
+}
+
+body {
+  background:#efefef;
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+/* puz 拼图完成容器 */
+/* puzz 拼图片容器 */
+#puz, #puzz {
+  position:absolute; 
+  user-select:none;
+}
+/* 虚线框 */
+#puz {
+  width:200px;
+  height:200px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border:3px dashed lightgray;
+  overflow:hidden;
+}
+/* 虚线框中的每一格 */
+#puz i {
+  float:left;
+  width:100px;
+  height:100px;
+  outline:1px dashed lightgray;
+}
+#puzz {
+  left:0;
+  top:0;
+  border:0;
+}
+#puzz i {
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:var(--color);
+  background-image:var(--image);
+  /* 裁剪图片 通过backgrond-size */
+  /* background-size:100%; */
+  background-size:200px 200px;
+  /* 抓取图片方式 */
+  cursor:move;
+  /* 阴影 */
+  box-shadow:0 0 10px rgba(0,0,0,.25);
+}
+#puzz i.first {
+  top: 100px;
+  left: 100px;
+}
+#puzz i.secon {
+  top: 500px;
+  left: 900px;
+}
+#puzz i.third {
+  top: 400px;
+  left: 200px;
+}
+#puzz i.fourt {
+  top: 100px;
+  left: 800px;
+}
+
+.first {
+  background-position:left top !important;
+}
+.secon {
+  background-position:right top !important;
+}
+.third {
+  background-position:left bottom !important;
+}
+.fourt {
+  background-position:right bottom !important;
+}
+
+/* puz 拼图容器被放置拼图片  */
+.dropped {
+  background:var(--color);
+  background-image:var(--image);
+  background-size:200px 200px;
+}
+/* puzz 拼图片被放置在拼图容器  */
+.done {
+  opacity:0;
+  pointer-events:none;
+}
+
+.allDone {
+  animation:allDone 1s linear forwards;
+  border:3px solid lightgray !important;
+}
+.allDone i {
+  outline:0 !important;
+}
+
+@keyframes allDone {
+  50% { transform:translate(-50%,-50%) scale(1.2); }
+}

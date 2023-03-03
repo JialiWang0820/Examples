@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #coords {
+      width: 200px;
+      height: 200px;
+      background-color: thistle;
+    }
+    #pointerzone {
+      width: 200px;
+      height: 200px;
+      background-color: teal;
+    }
+  </style>
+</head>
+<body onload="init()">
+  <!-- 原网站：https://mobiforge.com/design-development/html5-pointer-events-api-combining-touch-mouse-and-pen -->
+  <!-- 参考网站: https://www.jianshu.com/p/e8feac7035c6 -->
+  <div id="coords"></div>
+  <div id="pointerzone"></div>
+  <script>
+    function init() {
+      // Get a reference to our pointer div
+      var pointerzone = document.getElementById("pointerzone");
+      // Add an event handler for the pointerdown event
+      pointerzone.addEventListener("pointerdown", pointerHandler, false);
+    }
+    function pointerHandler(event) {
+      // Get a reference to our coordinates div
+      var coords = document.getElementById("coords");
+      // Write the coordinates of the pointer to the div
+      coords.innerHTML = 'x: ' + event.pageX + ', y: ' + event.pageY;
+    }
+  </script>
+</body>
+</html>

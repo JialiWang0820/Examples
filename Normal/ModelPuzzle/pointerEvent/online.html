@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>移动端拖拽</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      margin: auto;
+      height: calc(200vh - 2px);
+      overflow: hidden;
+      border: thin solid #000;
+      position: relative;
+      top: 50px;
+      left: 30px;
+    }
+
+    .target {
+      width: 200px;
+      height: 200px;
+      background: lightcoral;
+      position: absolute;
+    }
+
+    .targetNew {
+      width: 200px;
+      height: 200px;
+      background: blue;
+      position: absolute;
+      top: 300px;
+      left: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="targetNew"></div>
+    <div class="target"></div>
+  </div>
+
+  <script>
+
+    // 判断鼠标是否落在一个块级元素内部
+    function checkIn(obj, touchX, touchY) {
+      var div_x = Number(obj.getBoundingClientRect().left) // obj相对屏幕的横坐标
+      var div_x_width = Number(obj.getBoundingClientRect().left + obj.clientWidth) // obj相对屏幕的横坐标+width
+
+      var div_y = Number(obj.getBoundingClientRect().top) // obj相对屏幕的纵坐标
+      var div_y_height = Number(obj.getBoundingClientRect().top + obj.clientHeight) // obj相对屏幕的纵坐标+height
+
+      if (touchX > div_x && touchX < div_x_width && touchY > div_y && touchY < div_y_height) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    window.onload = function () {
+      // 确定视口宽度
+      var maxW = document.documentElement.clientWidth;
+      // 确定视口高度
+      var maxH = document.documentElement.clientHeight;
+      document.querySelector('.container').style.width = maxW;
+      // 获取被拖动的元素
+      var target = document.querySelector('.target');
+      // 获取放置元素的容器
+      var targetNew = document.querySelector('.targetNew');
+
+      var startX = 0;
+      var startY = 0;
+
+      // 元素的左边缘与其最近的定位祖先元素的左边缘之间的距离
+      var newstartX = targetNew.offsetLeft;
+      // 元素的上边缘与其最近的定位祖先元素的上边缘之间的距离
+      var newstartY = targetNew.offsetTop;
+      // 返回元素的高度（包括内边距和边框）
+      var newHeight = targetNew.offsetHeight;
+      // 返回元素的宽度（包括内边距和边框）
+      var newWidth = targetNew.offsetWidth;
+
+      target.addEventListener('mousedown', function (e) {
+        // 存储鼠标在当前元素被按下
+        e.target.mouseDown = true
+
+        /* e.clientX,e.clientY用于获取鼠标指针的当前坐标 
+           moveStartX,moveStartY计算鼠标指针位置相对于元素左上角的偏移量
+        */
+        e.target.moveStartX = e.clientX - this.offsetLeft;
+        e.target.moveStartY = e.clientY - this.offsetTop;
+        // 禁用浏览器默认行为
+        e.preventDefault()
+      });
+
+
+      target.addEventListener('mouseleave', function (e) {
+        /* 恢复被拖元素的初始位置 */
+        e.target.mouseDown = false
+        e.target.style.left = 0
+        e.target.style.top = 0
+        e.preventDefault()
+      });
+
+      target.addEventListener('mouseup', function (e) {
+        /* 恢复被拖元素的初始位置 */
+        e.target.mouseDown = false
+        e.target.style.left = 0
+        e.target.style.top = 0
+        e.preventDefault()
+      });
+
+      target.addEventListener('mousemove', function (e) {
+        if (e.target.mouseDown == true) {
+          // 判断鼠标松开时是否落入块级元素内部
+          if (checkIn(targetNew, e.clientX, e.clientY)) {
+            console.log("111")
+            targetNew.style.background = "yellow"
+          } else {
+            targetNew.style.background = "blue"
+          }
+          //（鼠标指针的当前坐标 - 鼠标指针位置相对于元素左上角的偏移量）计算元素top和left的值
+          e.target.style.left = e.clientX - e.target.moveStartX + 'px';
+          e.target.style.top = e.clientY - e.target.moveStartY + 'px';
+        }
+        e.preventDefault()
+      });
+
+      /* targetTouches 列表包含与事件的目标元素相关的所有触摸对象
+         e.targetTouches[0] 属性返回列表中的第一个触摸对象，表示当前正在移动或操作的触摸点 
+      */
+      target.addEventListener('touchstart', function (e) {
+        e.target.moveStartX = e.targetTouches[0].clientX - this.offsetLeft;
+        e.target.moveStartY = e.targetTouches[0].clientY - this.offsetTop;
+
+        e.preventDefault()
+      });
+
+      target.addEventListener('touchmove', function (e) {
+
+        if (checkIn(targetNew, e.targetTouches[0].clientX, e.targetTouches[0].clientY)) {
+          console.log("111")
+          targetNew.style.background = "yellow"
+        } else {
+          targetNew.style.background = "blue"
+        }
+
+        e.target.style.left = e.targetTouches[0].clientX - e.target.moveStartX + 'px';
+        e.target.style.top = e.targetTouches[0].clientY - e.target.moveStartY + 'px';
+
+
+        e.preventDefault()
+      });
+
+      target.addEventListener('touchend', function (e) {
+        console.log(e)
+        this.innerHTML = '拖动结束了';
+
+        e.preventDefault()
+      });
+    };
+  </script>
+
+
+</body>
+
+</html>

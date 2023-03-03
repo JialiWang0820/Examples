@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      touch-action: none;
+    }
+    #a {
+      width: 200px;
+      height: 200px;
+      background-color: teal;
+    }
+    #b {
+      width: 200px;
+      height: 200px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+  <div id="a"></div>
+  <div id="b"></div>
+  <script>
+    let dropElArr = [];//自行将需要drop的元素添加进此数组
+    let dropHit = null; //移动过程中命中检测通过的drop元素
+    let dataTransfer = {};//要传递给drop的数据
+    let div = document.querySelector('#a');
+    let divDrop = document.querySelector("#b");
+    dropElArr.push(divDrop)
+    div.style.cursor = 'drag';//设置鼠标样式
+
+    div.addEventListener('pointerdown', (e) => {
+      let vdom = document.body.appendChild(document.createElement('p'));
+      vdom.setPointerCapture(e.pointerId);
+      vdom.style.cursor = "grabbing";//设置按下鼠标样式
+
+      let dragHandle = document.body.appendChild(document.createElement('div'));
+      dragHandle.style.position = "absolute";
+      dragHandle.style.pointerEvents = "none";
+      dragHandle.getBoundingClientRect();
+
+      document.addEventListener('pointerup', pointerup);
+      document.addEventListener('pointermove', pointermove);
+      document.addEventListener('pointercancel', pointerup);
+
+      dataTransfer = {};//你想要传递给drop的数据
+
+      function pointerup(e) {
+        document.body.removeChild(vdom);
+        vdom = null;
+        document.removeEventListener('pointerup', pointerup);
+        document.removeEventListener('pointermove', pointerup);
+        document.removeEventListener('pointercancel', pointerup);
+
+        if (dropHit) dropHit.drop(e, dataTransfer);//通知命中的drag元素drop事件
+      }
+
+      function pointermove(e) {
+        //更新跟随pointer元素的位置
+        dragHandle.style.left = e.x;
+        dragHandle.style.top = e.y;
+          
+        //获取命中的drop元素
+        for (let i = 0; i < dropElArr.length; i++) {
+          if (hitTest(dropElArr[i], e)) {
+            if(dropHit&&dropHit.dragleave)dropHit.dragleave(e,dataTransfer);//通知drag元素拖放离开
+            dropHit = dropElArr[i];
+            if(dropHit.dragenter)dropHit.dragenter(e,dataTransfer);//通知drag元素拖放进入
+            return;
+          }
+        }
+        if(dropHit&&dropHit.dragleave){
+          dropHit.dragleave(e,dataTransfer);//通知drag元素拖放离开
+          dropHit = null;
+        }
+      }
+
+      function hitTest(dom, { x, y }) {
+        let bbox = dom.getBoundingClientRect();
+        return x > bbox.left && x < bbox.right && y > bbox.top && y < bbox.bottom;
+      }
+    });
+  </script>
+</body>
+</html>
