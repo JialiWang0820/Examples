@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 的 CSS 文件 -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous">
+  <title>Gradient skeleton button</title>
+  <style>
+    body {
+      background-color: #000;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrapper-cta button {
+      position: relative;
+      background-color: transparent;
+      border: none;
+      padding: 18px 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .wrapper-cta button span {
+      position: relative;
+      z-index: 3;
+      background-image: linear-gradient(to top right,#ababab,#fff,#ff9d72,#d04822);
+      background-size: 300% 300%;
+      background-position: right top;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      pointer-events: none;
+      display: inline-block;
+      transition-property: background-position;
+      -webkit-transition-property: background-position;
+      transition-duration: 1s;
+      -webkit-transition-duration: 1s;
+      /* cubic-bezier定义三次贝塞尔曲线，创建平滑的过渡和动画效果 */
+      /* P0和P3是曲线的起点和终点，P1和P2是控制点 */
+      /* P0和P3的坐标固定，表示初始/最终时间和初始/最终状态 */
+      /* P1和P2的坐标改变曲线的形状，影响动画或过渡效果 */
+      /* 可视化链接：https://cubic-bezier.com/#.17,.67,.83,.67 */
+      transition-timing-function: cubic-bezier(.5,0,0,1); 
+      -webkit-transition-timing-function: cubic-bezier(.5,0,0,1);
+    }
+
+    .wrapper-cta button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      background-image: linear-gradient(to bottom right,#ef7945,#000,#fff);
+      background-size: 200% 200%;
+      background-position: left top;
+      -webkit-transition-property: background-position;
+      transition-property: background-position;
+      -webkit-transition-duration: 1s;
+      transition-duration: 1s;
+      -webkit-transition-timing-function: cubic-bezier(.5,0,0,1);
+      transition-timing-function: cubic-bezier(.5,0,0,1);
+      z-index: 1;
+      text-indent: -999px;
+      overflow: hidden;
+      clip-path: polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+    }
+
+    .wrapper-cta button::after {
+      content: '';
+      background-color: #000;
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      bottom: 1px;
+      left: 1px;
+      z-index: 2;
+      z-index: 1;
+      clip-path: polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+      pointer-events: none;
+    }
+
+    .wrapper-cta button:hover::before {
+      background-position: right bottom;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container bg-black py-5 wrapper-cta">
+    <button type="button">
+      <span>Iniciar</span>
+    </button>
+  </div>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+</body>
+
+</html>

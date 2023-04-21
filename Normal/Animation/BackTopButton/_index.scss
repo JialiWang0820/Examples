@@ -1,0 +1,29 @@
+@use "sass:math";
+
+@import "../../styles/base";
+@import '../../styles/slider-mixins';
+@import '../../styles/slider-functions';
+
+// 回到顶部按钮
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  z-index: 60000;
+
+  svg {
+    @include media-breakpoint-down(md) {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    &:hover {
+      circle {
+        fill: #A5C205;
+      }
+    }
+  }
+}
+
+.hide {
+  display: none !important;
+}

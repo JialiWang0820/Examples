@@ -1,5 +1,18 @@
 {
   "evermonkey.token": "S=s48:U=1b02897:E=1808ec6967c:C=1806aba0ea0:P=1cd:A=en-devtoken:V=2:H=37ec4ecf7d1cf47c4f7aec79954e9a89",
   "evermonkey.noteStoreUrl": "https://app.yinxiang.com/shard/s48/notestore",
-  "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5501,
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
+  "stylelint.customSyntax": "postcss-scss",
+  "eslint.validate": [
+    "typescript",
+    "javascript"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true, // stylelint
+    "source.fixAll.eslint": true
+  }
 }

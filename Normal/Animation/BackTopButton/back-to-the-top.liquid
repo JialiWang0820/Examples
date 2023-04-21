@@ -1,0 +1,37 @@
+{% comment %}
+  返回顶部按钮出现在页面中的位置，单位像素
+{% endcomment %}
+{% assign desktop_vertical_offset_for_trigger = settings.desktop_vertical_offset_for_trigger %}
+{% assign mobile_vertical_offset_for_trigger = settings.mobile_vertical_offset_for_trigger %}
+
+
+{% comment %}
+  按钮位置在浏览器底部的垂直偏移
+{% endcomment %}
+{% assign desktop_position_from_bottom = settings.desktop_position_from_bottom %}
+{% assign mobile_position_from_bottom = settings.mobile_position_from_bottom %}
+
+{% style %}
+  .back-to-top {
+    bottom: {{ desktop_position_from_bottom }};
+  }
+  @media screen and (max-width: 768px) {
+    .back-to-top {
+      bottom: {{ mobile_position_from_bottom }};
+    }
+  }
+{% endstyle %}
+
+<link rel="stylesheet" href="{{ 'back-to-top-index.min.css' | asset_url }}">
+
+<div class="as-back-top-container">
+  <input class="as-pc-offset" type="hidden" value="{{ desktop_vertical_offset_for_trigger }}">
+  <input class="as-mob-offset" type="hidden" value="{{ mobile_vertical_offset_for_trigger }}">
+  <input class="as-show-backtop-btn" type="hidden" value="{{ settings.show_back_to_top_button }}">
+
+  <a id="BackToTop" href="#" title="Back to the top" class="back-to-top hide">
+    <span>{% render 'icon-back-top' %}</span>
+  </a>
+</div>
+
+<script src="{{ 'back-to-top.min.js' | asset_url }}" defer="defer"></script>
