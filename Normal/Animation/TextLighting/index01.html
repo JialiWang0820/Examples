@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #000000;
+    }
+
+    /* 动画关键帧 */
+    @keyframes light {
+      from {
+        background-position-x: -400px;
+      }
+      to {
+        background-position-x: 400px;
+      }
+    }
+
+    .text-light {
+      font-family: sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      color: #ffffff;
+      background: -webkit-linear-gradient(left, #000000 0%,#ffffff 50%,#000000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-repeat: no-repeat;
+      animation: light 5s infinite;
+      animation-play-state: paused; /* 初始状态暂停动画 */
+    }
+
+    .section-1 {
+      background-color: rgb(177, 25, 114);
+      height: 300px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .section-2 {
+      background-color: cadetblue;
+      height: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .section-3 {
+      background-color:chocolate;
+      height: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .section-4 {
+      background-color:crimson;
+      height: 600px;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="section-1">
+  </div>
+  <div class="section-2">
+  </div>
+  <p class="as-text-light text-light">Text with lighting by light</p>
+  <div class="section-3">
+  </div>
+  <div class="section-4">
+  </div>
+  <script>
+    document.addEventListener('scroll', () => {
+      let textElement = document.querySelector('.as-text-light')
+      let bounding = textElement.getBoundingClientRect()
+
+      // 文字进入视口范围，播放动画
+      if(bounding.top < window.innerHeight && bounding.bottom > 0) {
+        textElement.style.animationPlayState = 'running'
+      } else {
+        textElement.style.animationPlayState = 'paused'
+      }
+    })
+  </script>
+</body>
+</html>
