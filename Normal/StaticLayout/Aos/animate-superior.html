@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Floating Text Animation</title>
+  <!-- 加载Intersection Observer的polyfill
+  当浏览器不支持Intersection Observer时，polyfill.io会自动提供所需的polyfill代码，以确保API在旧浏览器中正常工作 -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .box {
+      height: 500px;
+      width: 100%;
+      background: cornflowerblue;
+    }
+
+    .container {
+      text-align: center;
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
+
+    .floating-text {
+      opacity: 0;
+      transform: translate3d(0,100%,0);
+    }
+
+    .animate__animated.animate__fadeInUp.active {
+      --animate-duration: 1s;
+      animation-delay: var(--animate-delay)
+    }
+
+    .n1.active {
+      --animate-delay: 0.5s;
+    }
+
+    .n2.active {
+      --animate-delay: 1s;
+    }
+
+    .n3.active {
+      --animate-delay: 1.5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+  </div>
+  <div class="container">
+    <h1 class="floating-text n1">Hello, I'm floating up!</h1>
+    <p class="floating-text n2">This is some text floating up too.</p>
+    <p class="floating-text n3">And more text is also floating up.</p>
+  </div>
+  <div class="box">
+  </div>
+  <div class="container">
+    <h1 class="floating-text n1">Hello, I'm floating up!</h1>
+    <p class="floating-text n2">This is some text floating up too.</p>
+    <p class="floating-text n3">And more text is also floating up.</p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      handleObserver()
+    });
+
+    const animateCSS = (elements, animation, prefix = 'animate__') =>
+      // 创建一个 Promise 并将其返回
+      new Promise((resolve, reject) => {
+        const animationName = `${prefix}${animation}`;
+        const nodes = document.querySelectorAll(elements);
+
+        nodes.forEach(node => {
+          node.classList.add(`${prefix}animated`, animationName);
+        });
+      });
+    
+    function handleObserver() {
+      const floatingTexts = document.querySelectorAll('.floating-text');
+
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.9, // 文案大概在视口高度的 90% 时触发
+      };
+
+      const intersectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // 元素目标进入视口
+            const floatingText = entry.target;
+            floatingText.classList.add('active');
+            animateCSS('.floating-text.active', 'fadeInUp');
+            observer.unobserve(floatingText); // 触发动画后移除观察者
+          } else {
+            console.log("元素目标离开视口");
+          }
+        });
+      }, options);
+
+      floatingTexts.forEach((floatingText) => {
+        intersectionObserver.observe(floatingText);
+      });
+    }
+
+  </script>
+</body>
+</html>

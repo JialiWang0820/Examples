@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 的 CSS 文件 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
+  <title>Border Radius</title>
+  <style>
+    .card {
+      border-radius: 8px;
+    }
+
+    .card-img-top {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .tip-top {
+      border-top-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container bg-success py-5 d-flex justify-content-center align-items-center">
+    <div class="position-relative">
+      <div class="card overflow-hidden bg-info border-0" style="width: 18rem;">
+        <img class="card-img-top" src="https://global.rokid.com/cdn/shop/files/6_afde68c5-c31d-4a1d-b44d-cc990e4cc1cc.png?v=1689000080&width=480" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class="position-absolute top-0 start-0 tip-top py-1 px-2 bg-success text-white">
+        <p class="mb-0 small fw-bolder text-body-inverse">Ongoing</p>
+      </div>
+    </div>
+  </div>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+</body>
+</html>

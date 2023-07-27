@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Floating Text Animation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .box {
+      height: 600px;
+      width: 100%;
+      background: cornflowerblue;
+    }
+
+    .container {
+      text-align: center;
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
+
+    .floating-text {
+      opacity: 0;
+      transform: translate3d(0,100%,0);
+    }
+
+    .floating-text.active {
+      animation-name: fadeInUp;
+      animation-duration: 0.5s;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+
+    .n1.active {
+      animation-delay: 0.5s;
+    }
+
+    .n2.active {
+      animation-delay: 1s;
+    }
+
+    .n3.active {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translate3d(0,100%,0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateZ(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+  </div>
+  <div class="container">
+    <h1 class="floating-text n1">Hello, I'm floating up!</h1>
+    <p class="floating-text n2">This is some text floating up too.</p>
+    <p class="floating-text n3">And more text is also floating up.</p>
+  </div>
+  <div class="box">
+  </div>
+  <div class="container">
+    <h1 class="floating-text n1">Hello, I'm floating up!</h1>
+    <p class="floating-text n2">This is some text floating up too.</p>
+    <p class="floating-text n3">And more text is also floating up.</p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const floatingTexts = document.querySelectorAll('.floating-text');
+
+      function handleScroll() {
+        floatingTexts.forEach(function(element) {
+          const addActive = !element.classList.contains('active');
+          const distanceFromTop = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+
+          // 控制文案大概在视口高度3/4时出现，可调整
+          if (addActive && distanceFromTop < window.scrollY + windowHeight * 0.75) {
+            element.classList.add('active');
+          }
+        });
+
+        // 触发动画后移除滚动事件监听器
+        window.removeEventListener('scroll', handleScroll);
+      }
+
+      // 节流滚动事件处理
+      let throttleTimer;
+      function throttleScroll() {
+        if (!throttleTimer) {
+          throttleTimer = setTimeout(() => {
+            throttleTimer = null;
+            handleScroll();
+          }, 200); // 节流间隔为 200 毫秒
+        }
+      }
+
+      window.addEventListener('scroll', throttleScroll);
+    });
+
+  </script>
+</body>
+</html>
