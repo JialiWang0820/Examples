@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame API</title>
+</head>
+<body>
+  <button id='begin' class="begin">开始</button>
+  <button id='end' class="end">停止</button>
+
+  <script>
+    (() => {
+      const beginBtn = document.querySelector("#begin")
+
+      const endBtn = document.querySelector("#end")
+
+      let myRef;
+
+      beginBtn.addEventListener("click", () => {
+        myRef = requestAnimationFrame(test)
+      })
+
+      endBtn.addEventListener("click", () => {
+        cancelAnimationFrame(myRef)
+      })
+
+      function test() {
+        myRef = requestAnimationFrame(test)
+        console.log('🚀🚀~ myRef:', myRef);
+      }
+    })()
+
+    // 时间间隔累加到1000s执行什么操作
+    // (() => {
+    //   let startTime = Date.now();
+
+    //   function handleTicker() {
+    //     foo(Date.now() - startTime);
+    //     startTime = Date.now();
+    //     requestAnimationFrame(handleTicker);
+    //   }
+
+    //   requestAnimationFrame(handleTicker);
+
+    //   let t = 0
+    //   function foo(timeInterval) {
+    //     t += timeInterval
+    //     console.log('🚀🚀~ t:', t);
+    //     if (t > 1000) {
+    //       console.log('🚀🚀~ 搞事情');
+    //       t = 0
+    //     }
+    //   }
+    // })()
+  </script>
+</body>
+</html>
