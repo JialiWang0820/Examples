@@ -2,7 +2,7 @@ javascript:(function () {
   var downloadConfirmed = window.confirm('是否开始导出图片信息？');
 
   if (downloadConfirmed) {
-    var mediaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow_1a85o');
+    var mediaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow');
 
     if (mediaWraps.length === 0) {
       window.alert('没有图片信息导出！');
@@ -12,9 +12,9 @@ javascript:(function () {
     var imageData = [];
 
     mediaWraps.forEach(function (mediaWrap, index) {
-      var imageNameEle = mediaWrap.querySelector('.Polaris-Text--bodyMd_jaf4s:not(.Polaris-Text--subdued_17vaa)');
+      var imageNameEle = mediaWrap.querySelector('.Polaris-Text--bodyMd:not(.Polaris-Text--subdued)');
       var imageName = imageNameEle.innerText;
-      var imageSizesEle = mediaWrap.querySelector('.Polaris-IndexTable__TableCell_14vwd > span');
+      var imageSizesEle = mediaWrap.querySelector('.Polaris-IndexTable__TableCell > span');
       var imageSize = imageSizesEle.innerText;
       var imageUrlEle = mediaWrap.querySelector('img');
       var imageUrl = imageUrlEle.src.replace(/_60x60(\.[a-zA-Z0-9]+(\?v=[0-9]+)?)$/, '$1');

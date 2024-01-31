@@ -4,7 +4,7 @@ javascript:(function () {
 
   if (downloadConfirmed) {
     // 选择所有包含图片信息的行
-    var mediaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow_1a85o');
+    var mediaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow');
 
     if (mediaWraps.length === 0) {
       // 未找到,则弹出警告框并返回
@@ -17,10 +17,10 @@ javascript:(function () {
 
     mediaWraps.forEach(function (mediaWrap, index) {
       // 图片名称信息
-      var imageNameEle = mediaWrap.querySelector('.Polaris-Text--bodyMd_jaf4s:not(.Polaris-Text--subdued_17vaa)');
+      var imageNameEle = mediaWrap.querySelector('.Polaris-Text--bodyMd:not(.Polaris-Text--subdued)');
       var imageName = imageNameEle.innerText;
       // 图片尺寸信息
-      var imageSizesEle = mediaWrap.querySelector('.Polaris-IndexTable__TableCell_14vwd > span');
+      var imageSizesEle = mediaWrap.querySelector('.Polaris-IndexTable__TableCell > span');
       var imageSize = imageSizesEle.innerText;
       // 图片链接信息
       var imageUrlEle = mediaWrap.querySelector('img');

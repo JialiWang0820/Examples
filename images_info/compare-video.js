@@ -2,7 +2,7 @@ javascript:(function(){
   var downloadConfirmed = window.confirm('是否开始下载视频？');
   
   if (downloadConfirmed) {
-      var meidiaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow_1a85o');
+      var meidiaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow');
       console.log('meidiaWraps', meidiaWraps);
       if (meidiaWraps.length == 0) {
         window.alert('没有视频下载！');
@@ -17,7 +17,7 @@ javascript:(function(){
       meidiaWraps.forEach(function (mediaWrap) {
           var coverImgSrc = mediaWrap.querySelector('img').src;
           coverImgSrcs.push(coverImgSrc);
-          var videoInfo = mediaWrap.querySelectorAll('.Polaris-Text--bodyMd_jaf4s');
+          var videoInfo = mediaWrap.querySelectorAll('.Polaris-Text--bodyMd');
           var videoName = videoInfo[0].innerText;
           var videoType = videoInfo[1].innerText.toLowerCase();
           videoNames.push(videoName), videoTypes.push(videoType);

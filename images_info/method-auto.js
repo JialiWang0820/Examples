@@ -6,7 +6,7 @@ javascript:(function downloadAllImagesInfo(pageNumber = 1) {
   }
 
   function isPageLoading() {
-    return !!document.querySelectorAll('.Polaris-IndexTable__LoadingPanel_2h3bc')[1];
+    return !!document.querySelectorAll('.Polaris-IndexTable__LoadingPanel')[1];
   }
 
   async function waitForPageToLoad() {
@@ -26,7 +26,7 @@ javascript:(function downloadAllImagesInfo(pageNumber = 1) {
   async function exportImagesInfo(pageNumber) {
     await waitForPageToLoad();
 
-    var mediaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow_1a85o');
+    var mediaWraps = document.querySelectorAll('.Polaris-IndexTable__TableRow');
 
     if (mediaWraps.length === 0) {
       window.alert('当前页面没有图片信息导出！');
@@ -36,9 +36,9 @@ javascript:(function downloadAllImagesInfo(pageNumber = 1) {
     var imageData = [];
 
     mediaWraps.forEach(function (mediaWrap, index) {
-      var imageNameEle = mediaWrap.querySelector('.Polaris-Text--bodyMd_jaf4s:not(.Polaris-Text--subdued_17vaa)');
+      var imageNameEle = mediaWrap.querySelector('.Polaris-Text--bodyMd:not(.Polaris-Text--subdued)');
       var imageName = imageNameEle.innerText;
-      var imageSizesEle = mediaWrap.querySelector('.Polaris-IndexTable__TableCell_14vwd > span');
+      var imageSizesEle = mediaWrap.querySelector('.Polaris-IndexTable__TableCell > span');
       var imageSize = imageSizesEle.innerText;
       var imageUrlEle = mediaWrap.querySelector('img');
       var imageUrl = imageUrlEle.src.replace(/_60x60(\.[a-zA-Z0-9]+(\?v=[0-9]+)?)$/, '$1');
