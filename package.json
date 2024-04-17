@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "siema": "^1.5.1"
+    "@studio-freight/lenis": "^1.0.42",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.0.20",
+    "gsap": "^3.12.5",
+    "siema": "^1.5.1",
+    "tailwind-merge": "^2.2.2"
   }
 }
