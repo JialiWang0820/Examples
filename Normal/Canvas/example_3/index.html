@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas example 3</title>
+</head>
+<body>
+  <a style="display: block;" href="" id="download" download="test.png">点我下载</a>
+  <canvas></canvas>
+
+  <script>
+    const canvas = document.querySelector('canvas');
+    canvas.width = document.body.offsetWidth;
+    canvas.height = 600;
+    const context = canvas.getContext('2d');
+    
+    const urlList = [
+      {
+        image: "./man.jpg",
+        left: 0,
+        top: 0,
+        width: document.body.offsetWidth,
+        height: 600
+      },
+      {
+        text: "我是帅哥扫码V我50",
+        left: 0,
+        top: 100,
+        width: 300,
+        height: 200
+      },
+      {
+        image: "./qrCode.jpg",
+        left: 0,
+        top: 400,
+        width: 100,
+        height: 100
+      }
+    ];
+
+    async function drawImageSequentially() {
+      for (const item of urlList) {
+        await new Promise ((resolve, reject) => {
+          if (item.image) {
+            const img = new Image();
+            // 跨域
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+              context.drawImage(
+                img,
+                item.left,
+                item.top,
+                item.width,
+                item.height
+              );
+              resolve();
+            };
+
+            img.src = item.image;
+            img.onerror = reject;
+          } else {
+            context.font = '20px serif';
+            context.fillStyle = "black";
+            context.fillText(item.text, item.left, item.top);
+            resolve();
+          }
+        });
+      }
+
+      const base64Data = canvas.toDataURL('image/png');
+      var download = document.getElementById('download');
+      // 下载图片
+      download.onclick = function (blob) {
+        download.href = base64Data;
+      };
+    }
+
+    drawImageSequentially().catch((error) => {
+      console.log("图像加载出错", error);
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas example 2</title>
+
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .color-wrap {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #hovered-color,
+    #selected-color {
+      width: 300px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="color-wrap">
+    <div id="hovered-color"></div>
+    <div id="selected-color"></div>
+  </div>
+
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // 加载图片
+    var img = new Image();
+    // 解决跨域问题
+    img.crossOrigin = 'anonymous';
+    img.src = 'https://img1.baidu.com/it/u=2439415002,3269324126&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
+    img.onload = function() {
+      canvas.height = img.height;
+      canvas.width = document.body.offsetWidth
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        document.body.offsetWidth,
+        (img.height * document.body.offsetHeight) / img.width
+      )
+    }
+
+    // 颜色展示区块
+    var hoveredColor = document.getElementById('hovered-color');
+    var selectedColor = document.getElementById('selected-color');
+
+    // 获取像素数据
+    function pick(event, target) {
+      let pixel = ctx.getImageData(event.offsetX, event.offsetY, 1, 1).data;
+      let rgba = `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3] / 255})`;
+      target.style.backgroundColor = rgba;
+      target.textContent = rgba;
+    }
+
+    // mousemove
+    canvas.addEventListener('mousemove', function(event) {
+      pick(event, hoveredColor);
+    })
+
+    // mousedown
+    canvas.addEventListener('mousedown', function(event) {
+      pick(event, selectedColor);
+    })
+  </script>
+</body>
+</html>

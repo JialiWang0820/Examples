@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+</head>
+<body>
+  <!-- 浏览器不支持这个 API，就会显示<canvas>标签中间的文字：“您的浏览器不支持 Canvas” -->
+  <canvas id="myCanvas" width="400" height="450">
+    您的浏览器不支持Canvas
+  </canvas>
+
+  <script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    // 填充三角形
+    ctx.beginPath();
+    ctx.moveTo(25, 25);
+    ctx.lineTo(105, 25);
+    ctx.lineTo(25, 105);
+    ctx.fillStyle = 'rgb(255, 165, 0)';
+    ctx.fill();
+
+    // 描边三角形
+    ctx.beginPath();
+    ctx.moveTo(125, 25);
+    ctx.lineTo(125, 105);
+    ctx.lineTo(205, 25);
+    ctx.closePath();
+    ctx.strokeStyle = 'rgb(0, 0, 0)';
+    ctx.stroke();
+
+    // 虚线三角形
+    ctx.beginPath();
+    ctx.moveTo(300, 25);
+    ctx.lineTo(400, 125);
+    ctx.lineTo(300, 125);
+    ctx.lineWidth = 3;
+    // 线条末端的样式
+    ctx.lineCap = 'round';
+    // 线条交点的样式
+    ctx.lineJoin = 'round';
+    ctx.setLineDash([15, 5]);
+    ctx.stroke();
+
+    // 绘制矩形
+    ctx.beginPath();
+    ctx.rect(25, 200, 40, 40);
+    ctx.fillStyle = 'pink';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.rect(100, 200, 40, 40);
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(170, 200, 40, 40);
+
+    ctx.strokeStyle = 'green';
+    ctx.strokeRect(250, 200, 40, 40);
+
+    ctx.fillRect(320, 200, 40, 40);
+    ctx.clearRect(325, 205, 30, 30);
+
+    // 弧形和圆
+    // ctx.beginPath();
+    // ctx.moveTo(0, 0);
+    // ctx.arcTo(50, 50, 100, 0, 25);
+    // ctx.lineTo(100, 0);
+    // ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(75, 320, 50, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    // 绘制图像
+    var img = new Image();
+    img.src = 'image.png';
+    var image = new Image(60, 45);
+    image.onload = drawImageActualSize;
+    image.src = 'https://example.com/image.jpg';
+
+    function drawImageActualSize() {
+      canvas.width = this.naturalWidth;
+      canvas.height = this.naturalHeight;
+      ctx.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight);
+    }
+  </script>
+</body>
+</html>
