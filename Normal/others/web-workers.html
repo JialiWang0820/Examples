@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>MDN Example - Queryable worker</title>
+    <script type="text/javascript">
+      // QueryableWorker 实例的方法：
+      //   * sendQuery(queryable function name, argument to pass 1, argument to pass 2, etc. etc.): 调用一个 Worker 的可查询函数
+      //   * postMessage(string or JSON Data): 见 Worker.prototype.postMessage()
+      //   * terminate(): 终止 Worker
+      //   * addListener(name, function): 添加一个监听器
+      //   * removeListener(name): 移除一个监听器
+      // QueryableWorker 实例的属性：
+      //   * defaultListener: 默认监听器只在 Worker 直接调用 postMessage() 函数时执行
+      function QueryableWorker(url, defaultListener, onError) {
+        const instance = this;
+        const worker = new Worker(url);
+        const listeners = {};
+
+        this.defaultListener = defaultListener ?? (() => {});
+
+        if (onError) {
+          worker.onerror = onError;
+        }
+
+        this.postMessage = (message) => {
+          worker.postMessage(message);
+        };
+
+        this.terminate = () => {
+          worker.terminate();
+        };
+
+        this.addListener = (name, listener) => {
+          listeners[name] = listener;
+        };
+
+        this.removeListener = (name) => {
+          delete listeners[name];
+        };
+
+        // 这个函数至少需要一个参数，即我们想要查询的方法名称。
+        // 然后我们可以传入方法所需的参数。
+        this.sendQuery = (queryMethod, ...queryMethodArguments) => {
+          if (!queryMethod) {
+            throw new TypeError(
+              "QueryableWorker.sendQuery takes at least one argument",
+            );
+          }
+          worker.postMessage({
+            queryMethod,
+            queryMethodArguments,
+          });
+        };
+
+        worker.onmessage = (event) => {
+          if (
+            event.data instanceof Object &&
+            Object.hasOwn(event.data, "queryMethodListener") &&
+            Object.hasOwn(event.data, "queryMethodArguments")
+          ) {
+            listeners[event.data.queryMethodListener].apply(
+              instance,
+              event.data.queryMethodArguments,
+            );
+          } else {
+            this.defaultListener.call(instance, event.data);
+          }
+        };
+      }
+
+      // 你自定义的 "queryable" worker
+      const myTask = new QueryableWorker("./my_task.js");
+
+      // 你自定义的 "listeners"
+      myTask.addListener("printStuff", (result) => {
+        document
+          .getElementById("firstLink")
+          .parentNode.appendChild(
+            document.createTextNode(`The difference is ${result}!`),
+          );
+      });
+
+      myTask.addListener("doAlert", (time, unit) => {
+        alert(`Worker waited for ${time} ${unit} :-)`);
+      });
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a
+          id="firstLink"
+          href="javascript:myTask.sendQuery('getDifference', 5, 3);"
+          >What is the difference between 5 and 3?</a
+        >
+      </li>
+      <li>
+        <a href="javascript:myTask.sendQuery('waitSomeTime');"
+          >Wait 3 seconds</a
+        >
+      </li>
+      <li>
+        <a href="javascript:myTask.terminate();">terminate() the Worker</a>
+      </li>
+    </ul>
+  </body>
+</html>

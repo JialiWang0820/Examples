@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Change Background</title>
+  <!-- 引入 GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <!-- 引入 ScrollTrigger 插件 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Signika Negative", sans-serif, Arial;
+      background-color: rgba(245, 241, 236, 1);
+      color: black;
+    }
+
+    .section {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .hero,
+    .final {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div class="hero flex-center">
+    <h1>HERO - Background Black</h1>
+  </div>
+  <section class="flex-center section" data-bgcolor="linear-gradient(360deg, #FFFFFF 0%, #F5F1EC 100%)">
+    <h1>Background Brown (#a52a2a)</h1>
+  </section>
+  <section class="flex-center section" data-bgcolor="rgba(245, 241, 236, 1)">
+    <h1>Background Violet (#8a2be2)</h1>
+  </section>
+  <section class="flex-center section" data-bgcolor="linear-gradient(180deg, #FFFFFF 0%, #F5F1EC 91.96%)">
+    <h1>Background Green (#016101)</h1>
+  </section>
+  <section class="flex-center final">
+    <h1>Final Section - Background Black</h1>
+  </section>
+
+  <script>
+    console.clear();
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const sections = gsap.utils.toArray(".section");
+
+    const switchColor = (color) => {
+      gsap.to(document.body, {
+        duration: 2,
+        ease: "power1.inOut",
+        background: color,
+        overwrite: "auto"
+      });
+    };
+
+    sections.forEach((section, i) => {
+      const color = section.dataset.bgcolor;
+      const previousColor = sections[i - 1]
+        ? sections[i - 1].dataset.bgcolor
+        : "rgba(245, 241, 236, 1)";
+      console.log(previousColor);
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => switchColor(color),
+        onEnterBack: () => i === sections.length - 1 && switchColor(color),
+        onLeave: () => i === sections.length - 1 && switchColor("rgba(245, 241, 236, 1)"),
+        onLeaveBack: () => switchColor(previousColor),
+        markers: { indent: 150 * i },
+        id: i + 1
+      });
+    });
+  </script>
+</body>
+</html>
